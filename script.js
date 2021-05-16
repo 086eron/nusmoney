@@ -17,7 +17,7 @@ const TransactionDataAll = [
   ];
 
  var TransactionData = null;
-
+/*
 // Add transactions to DOM list
 function addTransactionDOM(transaction) {
   const deposit_item = document.createElement('li');
@@ -41,6 +41,53 @@ function addTransactionDOM(transaction) {
   `;
 
   list.appendChild(loan_item);
+} */
+
+function addTransactionDOM(transaction) {
+
+  var nettAmt = transaction.deposit - transaction.loan;
+  const deposit_item = document.createElement('li');
+
+  if (nettAmt > 0){
+    deposit_item.classList.add('plus');
+    deposit_item.innerHTML = `
+    ${transaction.customername}-${transaction.bank}  <span> Balance $ ${Math.abs(
+      nettAmt 
+    )}</span> 
+    `;
+    } else {
+      deposit_item.classList.add('minus');
+      deposit_item.innerHTML = `
+      ${transaction.customername}-${transaction.bank} <span> Balance -$ ${Math.abs(
+        nettAmt  
+      )}</span> 
+      `;
+    }
+
+  /*
+  const deposit_item = document.createElement('li');
+
+  deposit_item.classList.add('plus');
+  deposit_item.innerHTML = `
+  ${transaction.customername}-${transaction.bank}  <span> $ ${Math.abs(
+    transaction.deposit  
+  )}</span> 
+  `;
+
+  list.appendChild(deposit_item);
+
+  const loan_item = document.createElement('li');
+
+  loan_item.classList.add('minus');
+  loan_item.innerHTML = `
+  ${transaction.customername}-${transaction.bank} <span> -$ ${Math.abs(
+    transaction.loan  
+  )}</span> 
+  `; 
+  */
+
+
+  list.appendChild(deposit_item);
 }
 
 // Update the balance, deposit and loan
